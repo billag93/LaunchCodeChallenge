@@ -26,7 +26,7 @@ import ViewQuotes from '../components/ViewQuotes.vue';
 display: grid;
 align-items: center;
 justify-items: center;
-grid-template-columns: 1fr 3fr;
+
 
     #header{
         top:0px;

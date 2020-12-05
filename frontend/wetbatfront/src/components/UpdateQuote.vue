@@ -65,6 +65,9 @@
             v-model="finalprice"
           />
         </div>
+        <div>
+          <button @click="updateQuote">Update</button>
+        </div>
       </div>
     </div>
   </div>
