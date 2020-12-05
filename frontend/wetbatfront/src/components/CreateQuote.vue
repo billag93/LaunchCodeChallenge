@@ -177,6 +177,8 @@ export default {
     background-color: #5BBFBA;
     text-decoration: none;
     color:white;
+    margin-top: 10%;
+    padding: 2% 2%;
     }
     h1{
      margin-bottom: 10%;
