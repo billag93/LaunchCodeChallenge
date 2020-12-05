@@ -14,6 +14,6 @@
   padding: 0;
 }
 html{
-  background-color: lightgray;
+  background-color:rgb(213, 220, 230);
 }
 </style>
