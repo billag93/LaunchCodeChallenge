@@ -178,5 +178,12 @@ export default {
     text-decoration: none;
     color:white;
     }
+    h1{
+     margin-bottom: 10%;
+    }
+    h2{
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
 }
 </style>

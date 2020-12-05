@@ -51,8 +51,10 @@ export default {
 
 <style lang="scss" scoped>
 #scroll{
+display: grid;
 overflow:scroll;
-height: 75vh;
+height: 80vh;
+
 #click {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
