@@ -28,10 +28,10 @@ def quotesendpoint():
             conn = mariadb.connect(host=dbcreds.host, password=dbcreds.password, user=dbcreds.user, port=dbcreds.port, database=dbcreds.database)
             cursor = conn.cursor()
             if quoteId != "" and quoteId != None:
-                cursor.execute("SELECT q.departure, q.arrival, q.destination, q.travellers, q.transportation, q.name, q.email, q.phoneNumber, q.finalprice FROM quotes q WHERE Id=?",[quoteId,])
+                cursor.execute("SELECT q.departure, q.arrival, q.destination, q.travellers, q.transportation, q.name, q.email, q.phoneNumber, q.finalprice,q.Id FROM quotes q WHERE Id=?",[quoteId,])
             else:
-                cursor.execute("SELECT  q.departure, q.arrival, q.destination, q.travellers, q.transportation, q.name, q.email, q.phoneNumber, q.finalprice FROM quotes q")
-            quotes = cursor.fetchall()[0]
+                cursor.execute("SELECT  q.departure, q.arrival, q.destination, q.travellers, q.transportation, q.name, q.email, q.phoneNumber, q.finalprice,q.Id FROM quotes q")
+            quotes = cursor.fetchall()
             print(quotes)
         except mariadb.ProgrammingError as error:
             print("There was a coding error by Twatter: ")
@@ -52,19 +52,22 @@ def quotesendpoint():
                 conn.rollback()
                 conn.close()
             if(quotes != None):
-                quotes_info = {
-                    "departure": quotes[4],
-                    "arrival": quotes[1],
-                    "destination": quotes[0],
-                    "travellers": quotes[2],
-                    "transportation": quotes[3],
-                    "name": quotes[0],
-                    "email": quotes[2],
-                    "phoneNumber": quotes[3],
-                    "finalprice": quotes[3],
-                    "quotenumber": quotes[3],
-                }
-                return Response(json.dumps(quotes_info, default = str), mimetype = "application/json", status = 200)
+                allQuotes = []
+                for quote in quotes:
+                    quotes_info = {
+                        "departure": quote[0],
+                        "arrival": quote[1],
+                        "destination": quote[2],
+                        "travellers": quote[3],
+                        "transportation": quote[4],
+                        "name": quote[5],
+                        "email": quote[6],
+                        "phoneNumber": quote[7],
+                        "finalprice": quote[8],
+                        "quoteId": quote[9],
+                    }
+                    allQuotes.append(quotes_info)
+                return Response(json.dumps(allQuotes, default = str), mimetype = "application/json", status = 200)
             else:
                 return Response("Something went wrong!", mimetype = "text/html", status =500)
 
@@ -76,6 +79,7 @@ def quotesendpoint():
         quotes_arrival = request.json.get("arrival") 
         quotes_destination = request.json.get("destination")
         quotes_travellers = request.json.get("travellers")
+        quotes_transportation = request.json.get("transportation")
         quotes_name = request.json.get("name")
         quotes_email = request.json.get("email")
         quotes_phonenumber = request.json.get("phonenumber")
@@ -84,7 +88,7 @@ def quotesendpoint():
         try:
             conn = mariadb.connect(host=dbcreds.host, password=dbcreds.password, user=dbcreds.user, port=dbcreds.port, database=dbcreds.database)
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO quotes(departure,arrival,destination,travellers,name,email,phonenumber,finalprice) VALUES(?,?,?,?,?,?,?,?)",[quotes_departure,quotes_arrival,quotes_destination,quotes_travellers,quotes_name,quotes_email,quotes_phonenumber,quotes_finalprice])
+            cursor.execute("INSERT INTO quotes(departure,arrival,destination,travellers,transportation,name,email,phonenumber,finalprice) VALUES(?,?,?,?,?,?,?,?,?)",[quotes_departure,quotes_arrival,quotes_destination,quotes_travellers,quotes_transportation,quotes_name,quotes_email,quotes_phonenumber,quotes_finalprice])
             conn.commit()
             rows = cursor.rowcount
         except mariadb.ProgrammingError as error:
@@ -195,7 +199,7 @@ def quotesendpoint():
             conn.commit()
             rows = cursor.rowcount
         except mariadb.ProgrammingError as error:
-            print("There was a coding error by Twatter: ")
+            print("There was a coding error by wetBat: ")
             print(error)
         except mariadb.DatabaseError as error:
             print("There has been a database error: ")
@@ -216,3 +220,91 @@ def quotesendpoint():
                 return Response("DELETE Success", mimetype = "text/html", status = 204)
             else: 
                 return Response("DELETE Failed", mimetype="text/html", status=404)
+            
+
+@app.route('/api/airports', methods = ["GET"])
+def destinationendpoint():
+    if request.method == "GET":
+        conn = None
+        cursor = None
+        destinations = None
+        try:
+            conn = mariadb.connect(host=dbcreds.host, password=dbcreds.password, user=dbcreds.user, port=dbcreds.port, database=dbcreds.database)
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM airport")
+            destinations = cursor.fetchall()
+            print(destinations)
+        except mariadb.ProgrammingError as error:
+            print("There was a coding error by wetBat: ")
+            print(error)
+        except mariadb.DatabaseError as error:
+            print("There has been a database error: ")
+            print(error)
+        except mariadb.OperationalError as error:
+            print("Connection error, please check your dbcreds: ")
+            print(error)
+        except Exception as error:
+            print("You should add an exception for htis error: ")
+            print(error)
+        finally:
+            if(cursor != None):
+                cursor.close
+            if(conn != None):
+                conn.rollback()
+                conn.close()
+            if(destinations != None):
+                all_destinations = []
+                for destination in destinations:
+                    destination_info = {
+                        "Id" : destination[0],
+                        "name" : destination[1]
+                    }
+                    all_destinations.append(destination_info)
+
+                return Response(json.dumps(all_destinations, default = str), mimetype = "application/json", status = 200)
+            else:
+                return Response("Something went wrong!", mimetype = "text/html", status =500)
+
+
+@app.route('/api/transportation', methods = ["GET"])
+def transportationendpoint():
+    if request.method == "GET":
+        conn = None
+        cursor = None
+        transportations = None
+        try:
+            conn = mariadb.connect(host=dbcreds.host, password=dbcreds.password, user=dbcreds.user, port=dbcreds.port, database=dbcreds.database)
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM transportation")
+            transportations = cursor.fetchall()
+            print(transportations)
+        except mariadb.ProgrammingError as error:
+            print("There was a coding error by wetBat: ")
+            print(error)
+        except mariadb.DatabaseError as error:
+            print("There has been a database error: ")
+            print(error)
+        except mariadb.OperationalError as error:
+            print("Connection error, please check your dbcreds: ")
+            print(error)
+        except Exception as error:
+            print("You should add an exception for htis error: ")
+            print(error)
+        finally:
+            if(cursor != None):
+                cursor.close
+            if(conn != None):
+                conn.rollback()
+                conn.close()
+            if(transportations != None):
+                all_transportation = []
+                for transportation in transportations:
+                    transportation_info = {
+                        "Id" : transportation[0],
+                        "name" : transportation[1]
+                    }
+                    all_transportation.append(transportation_info)
+
+                return Response(json.dumps(all_transportation, default = str), mimetype = "application/json", status = 200)
+            else:
+                return Response("Something went wrong!", mimetype = "text/html", status =500)
