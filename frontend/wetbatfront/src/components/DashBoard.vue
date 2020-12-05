@@ -57,9 +57,9 @@ export default {
     #writing{
         display: grid;
         grid-template-rows: 1fr 1fr;
-        row-gap: 5%;
-        padding: 2% 2%;
-        margin: 2% 2%;
+        row-gap: 1%;
+        padding: 1% 1%;
+        margin: 1% 1%;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         color: white;
     }
@@ -70,7 +70,7 @@ export default {
         grid-template-rows: 3fr 1fr;
         #teamwork{
             img{
-                width: 100%;
+                width: 400px;
                 border: 1px solid white;
                 border-radius: 8%;
             }
@@ -84,8 +84,9 @@ export default {
             display: grid;
             align-items: center;
             justify-items: center;
-            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #F0CF85;
             }
         }
     }

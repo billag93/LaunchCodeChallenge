@@ -2,6 +2,9 @@
   <div>
     <div id="createquote">
       <div>
+        <h1>Create A Quote</h1>
+      </div>
+      <div>
           <h2>Enter Your Departure</h2>
         <input id="departure" class="quote" type="date" v-model="departure" />
       </div>
@@ -12,6 +15,7 @@
       <div>
           <h2>Choose Your Destination</h2>
        <select  id="destination" class="quote" v-model="alldestinations">
+         <!-- Here we are accessing our array using a for loop and identifying and individaul object using the destination Id -->
            <option v-for="destination in destinations" :key="destination.Id">
                {{destination.name}}
            </option>
@@ -24,6 +28,7 @@
       <div>
           <h2>Choose Your transportation</h2>
        <select  id="destination" class="quote" v-model="alltransportations">
+         <!-- Here we are accessing our array using a for loop and identifying and individaul object using the transportation Id -->
            <option v-for="transportation in transportations" :key="transportation.Id">
                {{transportation.name}}
            </option>
@@ -45,7 +50,9 @@
         <h2>Estimate</h2>
         <input id="finalprice" class="quote" type="number" v-model="finalprice">
       </div>
-      <button id="crbutton" @click="createQuote">Create Quote</button>
+      <div class="button">
+      <button @click="createQuote">Create Quote</button>
+      </div>
     </div>
   </div>
 </template>
@@ -59,8 +66,10 @@ export default {
     return {
       departure: "",
       arrival:"",
+      // all the airports are sent back in an array
       destinations: [],
       travellers: Number,
+      // all the transportation compnaies are sent back in an array
       transportations:[],
       name:"",
       email:"",
@@ -76,7 +85,7 @@ export default {
         this.getTransportations()
         
         },
-
+    // This is the axios request that will create a quote by communicating with flask and input it into our DB. 
     methods: {
         createQuote:function(){
             axios.request({
@@ -103,7 +112,7 @@ export default {
                 console.log(error)
             })
         },
-
+      // Here we are communicating with flask to retrieve our airports from the Db
         getDestinations:function(){
             axios.request({
             url: "http://127.0.0.1:5000/api/airports",
@@ -121,7 +130,7 @@ export default {
             console.log(error);
           });
         },
-
+      // Here we are communicating with flask to retrieve our rental companies from the Db
         getTransportations:function(){
             return axios.request({
             url: "http://127.0.0.1:5000/api/transportation",
@@ -153,17 +162,21 @@ export default {
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size:0.6em;
     color: #5F6CAF;
-    border: 4px solid #5BBFBA;
+    border: 2px solid #5BBFBA;
     border-radius:8%;
-    margin:2% 2%;
-    padding: 3% 3%;
+    margin:10% 10%;
+    padding: 5% 5%;
+    background-color: white;
     .quote{
-    border: 4px solid #5BBFBA;
+    border: 1px solid #5BBFBA;
     border-radius:8%;
     }
-    #crbutton{
+    .button button{
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size:0.4em;
+    font-size:1.75em;
+    background-color: #5BBFBA;
+    text-decoration: none;
+    color:white;
     }
 }
 </style>

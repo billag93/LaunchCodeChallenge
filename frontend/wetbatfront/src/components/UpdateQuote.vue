@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="updatequote">
+      <!-- Updating the quote is very similar to creating a quote -->
       <button @click="updateGrid = !updateGrid">Update</button>
       <div v-if="updateGrid">
         <div>
@@ -13,7 +14,7 @@
         </div>
         <div>
           <h2>Choose Your Destination</h2>
-          <select id="destination" class="quote" v-model="destinations">
+          <select id="destination" class="quote" v-model="alldestinations">
             <option v-for="destination in destinations" :key="destination.Id">
               {{ destination.name }}
             </option>
@@ -21,7 +22,7 @@
         </div>
         <div>
           How Many People Will be travelling
-          <input
+          <input min="1"
             id="travellers"
             class="quote"
             type="number"
@@ -30,7 +31,7 @@
         </div>
         <div>
           <h2>Choose Your transportation</h2>
-          <select id="destination" class="quote" v-model="transportations">
+          <select id="transportation" class="quote" v-model="alltransportations">
             <option
               v-for="transportation in transportations"
               :key="transportation.Id"
@@ -66,7 +67,7 @@
           />
         </div>
         <div>
-          <button @click="updateQuote">Update</button>
+          <button @click="updateQuote">Update This Quote</button>
         </div>
       </div>
     </div>
@@ -90,6 +91,9 @@ export default {
       phonenumber: "",
       finalprice: Number,
       updateGrid: false,
+      alldestinations:"",
+      alltransportations:"",
+
     };
   },
   props: {
@@ -115,13 +119,14 @@ export default {
           data: {
             departure: this.departure,
             arrival: this.arrival,
-            destination: this.destination,
+            destination: this.alldestinations,
             travellers: this.travellers,
             name: this.name,
             email: this.email,
             phonenumber: this.phonenumber,
             finalprice: this.finalprice,
             quoteId: this.quoteId,
+            transportation: this.alltransportations,
           },
         })
         .then((response) => {
@@ -177,15 +182,18 @@ export default {
     align-items: center;
     justify-items: left;
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size:0.6em;
+    font-size:0.65em;
     color: #5F6CAF;
-    border: 4px solid #5BBFBA;
     border-radius:8%;
     margin:2% 2%;
     padding: 3% 3%;
-    .quote{
-    border: 4px solid #5BBFBA;
-    border-radius:8%;
+    
+    button{
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size:1.75em;
+    background-color: #5BBFBA;
+    text-decoration: none;
+    color:white;
     }
 }
 </style>

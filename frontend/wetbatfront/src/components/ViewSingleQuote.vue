@@ -74,16 +74,19 @@ import UpdateQuote from './UpdateQuote.vue'
     align-items: center;
     justify-items: left;
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size:0.6em;
+    font-size:1.2em;
     color: #5F6CAF;
-    border: 4px solid #5BBFBA;
-    border-radius:8%;
-    margin:2% 2%;
+    border: 2px solid #5BBFBA;
+    border-radius:2%;
+    margin:10% 10%;
     padding: 3% 3%;
-    .quote{
-    border: 4px solid #5BBFBA;
-    border-radius:8%;
+    background-color: white;
+    width:50%;
+    p{
+        margin:2% 2%;
+        
     }
+    
 }
 
 </style>

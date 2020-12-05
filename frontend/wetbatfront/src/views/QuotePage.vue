@@ -11,7 +11,7 @@
           <div>
               <dash-board></dash-board>
           </div>
-          <div>
+          <div id="splitquotes">
         <create-quote></create-quote>
         <view-quotes></view-quotes>
         </div>
@@ -48,12 +48,16 @@ export default {
     position: relative;
     left: 0px;
     #sidebar{
-        position:relative;
+        position:sticky;
         left: 0px;
     }
     #thequotes{
         display: grid;
-        grid-template-rows: 1fr 2fr;
+       
+        #splitquotes{
+            display: grid;
+            grid-template-columns:1fr 1fr;
+        }
     }
   }
 }

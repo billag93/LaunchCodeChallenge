@@ -16,6 +16,7 @@ import axios from "axios"
             },
         },
         methods: {
+            // This axios request will delete a quote with the Id being passed down using props from the single quote component
             DeleteQuote: function(){
                 axios.request({
                     url: "http://127.0.0.1:5000/api/quotes",
@@ -38,5 +39,14 @@ import axios from "axios"
 </script>
 
 <style lang="scss" scoped>
+button{
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size:1.2em;
+    background-color: #5BBFBA;
+    text-decoration: none;
+    color:white;
+    padding: 2% 2%;
+    margin: 1% 1%;
+}
 
 </style>
