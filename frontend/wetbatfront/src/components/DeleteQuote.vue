@@ -19,7 +19,7 @@ import axios from "axios"
             // This axios request will delete a quote with the Id being passed down using props from the single quote component
             DeleteQuote: function(){
                 axios.request({
-                    url: "http://127.0.0.1:5000/api/quotes",
+                    url: "http://wetbat.ml/api/quotes",
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json"
@@ -47,6 +47,7 @@ button{
     color:white;
     padding: 2% 2%;
     margin: 1% 1%;
+    cursor: pointer;
 }
 
 </style>

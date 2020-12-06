@@ -44,7 +44,7 @@ import UpdateQuote from './UpdateQuote.vue'
         methods: {
             getQuotes:function() {
                 axios.request({
-                    url:"http://127.0.0.1:5000/api/quotes",
+                    url:"http://wetbat.ml/api/quotes",
                     method:"GET",
                     params:{
                         quoteId:this.$route.params.id

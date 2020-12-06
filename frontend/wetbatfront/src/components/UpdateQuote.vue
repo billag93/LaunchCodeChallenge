@@ -111,7 +111,7 @@ export default {
     updateQuote: function () {
       axios
         .request({
-          url: "http://127.0.0.1:5000/api/quotes",
+          url: "http://wetbat.ml/api/quotes",
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -140,7 +140,7 @@ export default {
     getDestinations: function () {
       axios
         .request({
-          url: "http://127.0.0.1:5000/api/airports",
+          url: "http://wetbat.ml/api/airports",
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -158,7 +158,7 @@ export default {
     getTransportations: function () {
       return axios
         .request({
-          url: "http://127.0.0.1:5000/api/transportation",
+          url: "http://wetbat.ml/api/transportation",
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -194,6 +194,7 @@ export default {
     background-color: #5BBFBA;
     text-decoration: none;
     color:white;
+    cursor: pointer;
     }
 }
 </style>

@@ -89,7 +89,7 @@ export default {
     methods: {
         createQuote:function(){
             axios.request({
-                url: "http://127.0.0.1:5000/api/quotes",
+                url: "http://wetbat.ml/api/quotes",
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json",
@@ -115,7 +115,7 @@ export default {
       // Here we are communicating with flask to retrieve our airports from the Db
         getDestinations:function(){
             axios.request({
-            url: "http://127.0.0.1:5000/api/airports",
+            url: "http://wetbat.ml/api/airports",
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -133,7 +133,7 @@ export default {
       // Here we are communicating with flask to retrieve our rental companies from the Db
         getTransportations:function(){
             return axios.request({
-            url: "http://127.0.0.1:5000/api/transportation",
+            url: "http://wetbat.ml/api/transportation",
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -179,6 +179,7 @@ export default {
     color:white;
     margin-top: 10%;
     padding: 2% 2%;
+    cursor: pointer;
     }
     h1{
      margin-bottom: 10%;
